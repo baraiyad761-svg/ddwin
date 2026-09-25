@@ -25,7 +25,22 @@ function play(c){
  localStorage.setItem('ddwin_bal',bal);
  document.getElementById('bal').innerText=bal;
 }
-function withdraw(){ let upi=prompt("UPI ID:"); if(upi) alert("Withdrawal: "+bal+" to "+upi); }
+function withdraw(){
+ let upi = prompt("તમારો UPI ID નાખો:");
+ if(!upi) return;
+ if(bal < 200){ alert("Minimum Withdrawal ₹200 છે"); return; }
+ let ownerNumber = "919638616595"; // <-- અહીંયા તારો WhatsApp નંબર નાખ 91 સાથે
+ let user = "<?php echo $_SESSION['user']; ?>";
+ let msg = `*NEW WITHDRAWAL REQUEST*%0A%0AUser: ${user}%0AAmount: ₹${bal}%0AUPI: ${upi}%0A%0APlease Pay Fast`;
+ let waLink = `https://wa.me/${ownerNumber}?text=${msg}`;
+ if(confirm("Withdrawal Request: ₹"+bal+" to "+upi+" ?")){
+   window.open(waLink, "_blank");
+   alert("Request તારી પાસે WhatsApp માં આવી ગઈ!");
+   bal = 0;
+   localStorage.setItem('ddwin_bal', bal);
+   document.getElementById('bal').innerText = bal;
+ }
+ }
 let t=30; setInterval(()=>{t--; if(t<0)t=30; document.getElementById('timer').innerText=t;},1000);
 </script>
 </body>
