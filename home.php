@@ -1,10 +1,14 @@
+<?php session_start(); 
+if(!isset($_SESSION['user'])){ header("Location: login.php"); exit(); }
+$user = $_SESSION['user'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body{margin:0;background:#f5f5f5;font-family:Arial}
-.top{background:#ff4d4d;color:#fff;padding:15px;border-radius:0 0 20px 20px}
+.top{background:#ff4d4d;color:#fff;padding:15px;border-radius:0 0 20px 20px;display:flex;justify-content:space-between}
 .wallet{background:#fff;margin:10px;padding:15px;border-radius:15px;display:flex;justify-content:space-between;box-shadow:0 2px 5px #ccc}
 .btn{padding:8px 20px;border-radius:20px;border:none;color:#fff;font-weight:bold}
 .dep{background:#ff4d4d}.with{background:#2ecc71}
@@ -17,28 +21,23 @@ body{margin:0;background:#f5f5f5;font-family:Arial}
 </style>
 </head>
 <body>
-
-<div class="top"><h3>DDWIN</h3></div>
-
+<div class="top"><div><h3 style="margin:0">DDWIN</h3><small>User: <?php echo $user; ?></small></div><a href="login.php" style="color:#fff;text-decoration:none">Logout</a></div>
 <div class="wallet">
 <div><b>Wallet Balance</b><br>₹ <span id="bal">1000.00</span></div>
-<div><button class="btn with" onclick="location.href='index.php'">Withdraw</button> <button class="btn dep">Deposit</button></div>
+<div><button class="btn with" onclick="location.href='index.php'">Play</button> <button class="btn dep">Deposit</button></div>
 </div>
-
 <div class="lobby">
-<div class="card" onclick="location.href='index.php'"><p>🎮</p><b>Lobby</b></div>
+<div class="card" onclick="location.href='index.php'"><p>🎮</p><b>Lobby Color</b></div>
 <div class="card"><p>🐟</p><b>Fishing</b></div>
 <div class="card" onclick="location.href='slot.php'"><p>🎰</p><b>Slots</b></div>
 <div class="card"><p>🃏</p><b>Casino</b></div>
 </div>
-
 <div class="bottom">
 <a href="home.php" class="active">🏠<br>Home</a>
 <a href="#">📊<br>Activity</a>
-<a href="#">🌀<br>Spin</a>
+<a href="slot.php">🎰<br>Slots</a>
 <a href="#">🎁<br>Promotion</a>
-<a href="#">👤<br>Account</a>
+<a href="login.php">👤<br>Account</a>
 </div>
-
 </body>
-</html>￼Enter
+</html>
