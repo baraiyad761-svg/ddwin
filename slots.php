@@ -1,41 +1,37 @@
 <?php session_start(); if(!isset($_SESSION['user'])){header('Location: login.php'); exit();} ?>
-<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DDWIN Slots</title>
-<style>body{background:#111;color:#fff;font-family:Arial;text-align:center} .slot{font-size:50px;margin:20px;background:#222;padding:20px;border-radius:15px} button{padding:15px 30px;border:none;border-radius:10px;background:gold;font-weight:bold;font-size:18px}</style>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Slots Lobby</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:Arial;margin:0;padding:10px}
+h2{text-align:center}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:10px}
+.card{background:#1e1e1e;border-radius:15px;padding:10px;text-align:center;border:1px solid #333}
+.card img{width:100%;border-radius:10px;height:80px;object-fit:cover}
+.card p{margin:8px 0 5px;font-size:13px;font-weight:bold}
+.card button{background:gold;border:none;padding:6px 15px;border-radius:20px;font-weight:bold;font-size:12px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:10px}
+</style>
 </head><body>
-<h2>🎰 DDWIN SLOTS 🎰</h2>
-<p>Balance: ₹<span id="bal"></span></p>
-<div class="slot" id="slot">🍒 | 🍋 | 🔔</div>
-<input type="number" id="bet" value="100" style="padding:10px;border-radius:8px;width:120px">
-<br><br>
-<button onclick="spin()">SPIN (Win 5x)</button>
-<br><br>
-<a href="index.php"><button style="background:#444;color:#fff">BACK TO COLOUR GAME</button></a>
+<div class="top">
+<a href="index.php" style="color:#fff;text-decoration:none">← Back</a>
+<b>Balance: ₹<span id="bal"></span></b>
+</div>
+<h2>🎰 SLOT GAMES LOBBY 🎰</h2>
+<div class="grid">
 
-<script>
-let bal=parseInt(localStorage.getItem('ddwin_bal')||1000);
-document.getElementById('bal').innerText=bal;
-let icons=["🍒","🍋","🔔","🍉","⭐","7️⃣"];
-function spin(){
- let bet=parseInt(document.getElementById('bet').value);
- if(bet>bal){alert("Balance ઓછું છે");return;}
- let a=icons[Math.floor(Math.random()*icons.length)];
- let b=icons[Math.floor(Math.random()*icons.length)];
- let c=icons[Math.floor(Math.random()*icons.length)];
- document.getElementById('slot').innerText=a+" | "+b+" | "+c;
- if(a==b && b==c){
-   let win=bet*5;
-   bal+=win;
-   alert("JACKPOT! You Won ₹"+win);
- }else if(a==b || b==c || a==c){
-   let win=bet*1;
-   bal+=win;
-   alert("Small Win! ₹"+win);
- }else{
-   bal-=bet;
-   alert("Try Again!");
- }
- localStorage.setItem('ddwin_bal',bal);
- document.getElementById('bal').innerText=bal;
+<?php
+$games = ["Aviator","Mines","Crash","Plinko","Dice","Wheel","7 Up Down","Andar Bahar","Dragon Tiger","Roulette","Slots Pro","Fruit King","Mega Win","Lucky 9","Joker","Super Ace","Money Coming","Fortune Gems","Bomb","Sweet Bonanza"];
+foreach($games as $g){
+  echo '<div class="card">
+  <img src="https://picsum.photos/200/100?random='.rand(1,100).'">
+  <p>'.$g.'</p>
+  <a href="slot_play.php?game='.$g.'"><button>PLAY</button></a>
+  </div>';
 }
+?>
+
+</div>
+<script>
+let bal=localStorage.getItem("ddwin_bal")||1000;
+document.getElementById("bal").innerText=bal;
 </script>
-</body></html>￼Enter
+</body></html>
