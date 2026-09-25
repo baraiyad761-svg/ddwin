@@ -11,6 +11,7 @@
 <button class="red" onclick="play('red')">RED</button>
 <button class="violet" onclick="play('violet')">VIOLET</button>
 <p>Balance: ₹ <span id="bal">1000</span></p>
+ <a href="deposit.php"><button style="background:#3498db; width:90%; padding:14px; border-radius:10px; color:#fff; font-weight:bold; border:none; margin-top:10px;">RECHARGE / DEPOSIT</button></a>
 <button class="withdraw" onclick="withdraw()">WITHDRAWAL</button>
 </div>
 <script>
